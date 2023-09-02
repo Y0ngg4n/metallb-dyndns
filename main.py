@@ -67,8 +67,10 @@ def patchMetallb(new_prefix):
                 first_old_interface = getIPv6Interface(range[0], 128)
                 second_old_interface = getIPv6Interface(range[1], 128)
                 newAdresses.append(new_prefix + first_old_interface + "-" + new_prefix + second_old_interface)
-        print(newAdresses)
-
+        ipPool["spec"]["addresses"] = newAdresses
+        api_instance.patch_namespaced_custom_object(group="metallb.io", version="v1beta1",
+                                                           namespace="system", name="pool-1",
+                                                           plural="ipaddresspools", body=ipPool)
 
 
 if __name__ == '__main__':
