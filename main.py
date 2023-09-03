@@ -50,7 +50,7 @@ def getIPv6Interface(ipv6Addr, interfaceLen):
 
 
 def patchMetallb(new_prefix):
-    configuration = config.load_kube_config(config_file="/home/yonggan/Nextcloud/Yggdrasil/NewKubernetes/kubeconfig")
+    configuration = config.load_incluster_config()
     with kubernetes.client.ApiClient(configuration) as api_client:
         api_instance = kubernetes.client.CustomObjectsApi(api_client)
         # print(api_instance.get_api_resources(group="metallb.io", version="v1beta1"))
